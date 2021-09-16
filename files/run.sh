@@ -17,6 +17,11 @@ if [ -z $PROXY_PASS ]; then
   exit 1
 fi
 
+if [ -z $RESTRICTED_END_POINT ]; then
+  echo >&2 "RESTRICTED_END_POINT must be set"
+  exit 1
+fi
+
 htpasswd -bBc /etc/nginx/.htpasswd $BASIC_AUTH_USERNAME $BASIC_AUTH_PASSWORD
 sed \
   -e "s/##CLIENT_MAX_BODY_SIZE##/$CLIENT_MAX_BODY_SIZE/g" \
@@ -25,6 +30,7 @@ sed \
   -e "s/##SERVER_NAME##/$SERVER_NAME/g" \
   -e "s/##PORT##/$PORT/g" \
   -e "s|##PROXY_PASS##|$PROXY_PASS|g" \
+  -e "s|##RESTRICTED_END_POINT##|$RESTRICTED_END_POINT|g" \
   nginx.conf.tmpl > /etc/nginx/nginx.conf
 
 exec nginx -g "daemon off;"
