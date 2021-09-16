@@ -1,7 +1,5 @@
 # Docker image of Nginx Proxy with Basic Auth
 
-[![Docker Repository on Quay](https://quay.io/repository/dtan4/nginx-basic-auth-proxy/status "Docker Repository on Quay")](https://quay.io/repository/dtan4/nginx-basic-auth-proxy)
-
 Simple HTTP Proxy with Basic Authentication
 
 ```
