@@ -21,9 +21,10 @@ $ docker run \
     -e BASIC_AUTH_USERNAME=username \
     -e BASIC_AUTH_PASSWORD=password \
     -e PROXY_PASS=https://www.google.com \
+    -e RESTRICTED_END_POINT=/search?q=nginx \
     -e SERVER_NAME=proxy.dtan4.net \
     -e PORT=80 \
-    quay.io/dtan4/nginx-basic-auth-proxy
+    kakanwelldev/nginx-proxy-basic-auth:1.0
 ```
 
 Access to http://localhost:8080 , then browser asks you username and password.
@@ -59,6 +60,7 @@ Reading: 0 Writing: 1 Waiting: 0
 |`BASIC_AUTH_USERNAME`|Basic auth username|
 |`BASIC_AUTH_PASSWORD`|Basic auth password|
 |`PROXY_PASS`|Proxy destination URL|
+|`RESTRICTED_END_POINT`|Restricted end point for Basic auth|
 
 ### Optional
 
@@ -73,6 +75,9 @@ Reading: 0 Writing: 1 Waiting: 0
 ## Author
 
 Daisuke Fujita ([@dtan4](https://github.com/dtan4))
+
+## Extended BY
+Kakan Ghosh (https://github.com/kgh-wtag)
 
 ## License
 
