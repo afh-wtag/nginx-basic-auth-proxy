@@ -17,15 +17,15 @@ http {
   }
 
   server {
-    listen ##PORT##;
-    server_name ##SERVER_NAME##;
+    listen ##BACKEND_PORT##;
+    server_name ##BACKEND_SERVER_NAME##;
 
     client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
     proxy_read_timeout ##PROXY_READ_TIMEOUT##;
 
     include /etc/nginx/conf.d/*.conf;
 
-    location ##RESTRICTED_END_POINT## {
+    location ~ ^/(##RESTRICTED_END_POINT##) {
       proxy_pass ##PROXY_PASS##;
       auth_basic "Restricted";
       auth_basic_user_file /etc/nginx/.htpasswd;
@@ -33,6 +33,11 @@ http {
       proxy_set_header X-Forwarded-Host $host;
       # Do not pass Authorization header to destination
       proxy_set_header Authorization "";
+    }
+    
+    location ##HEALTH_CHECK_END_POINT## {
+        access_log off;
+        return 200 "healthy\n";
     }
 
     location / {
@@ -50,15 +55,6 @@ http {
       # WebSocket proxying - from http://nginx.org/en/docs/http/websocket.html
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection $connection_upgrade;
-    }
-  }
-
-  server {
-    listen 8090;
-
-    location /nginx_status {
-      stub_status on;
-      access_log off;
     }
   }
 }

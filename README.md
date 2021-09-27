@@ -69,6 +69,7 @@ Reading: 0 Writing: 1 Waiting: 0
 |`CLIENT_MAX_BODY_SIZE`|Value for `client_max_body_size` directive|`1m`|
 |`PROXY_READ_TIMEOUT`|Value for `proxy_read_timeout` directive|`60s`|
 |`WORKER_PROCESSES`|Value for `worker_processes` directive|`auto`|
+|`HEALTH_CHECK_END_POINT`|Value for `HEALTH_CHECK_END_POINT` directive|`/health`|
 
 ## Author
 
